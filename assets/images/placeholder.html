@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Placeholder Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .canvas-container {
+            margin: 20px 0;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            max-width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #d4af37;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            text-decoration: none;
+        }
+
+        h1 {
+            color: #d4af37;
+        }
+
+        .instruction {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Oval Capital Website Image Generator</h1>
+
+    <div class="instruction">
+        <p>This page generates placeholder images for the Oval Capital website. You can use these temporarily while
+            developing, but should replace them with real photos before deployment.</p>
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Click the "Generate Images" button below</li>
+            <li>Right-click on each image and select "Save Image As..."</li>
+            <li>Save each image with the appropriate filename shown below each canvas</li>
+            <li>Place the downloaded images in your assets/images folder</li>
+        </ol>
+    </div>
+
+    <button id="generateBtn" class="btn">Generate Images</button>
+
+    <div id="imageContainer"></div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function () {
+            const imageSpecs = [
+                { name: 'hero-bg.jpg', width: 1920, height: 1080, text: 'Oval Capital Hero Image', bg: '#222', textColor: '#fff' },
+                { name: 'about-image.jpg', width: 800, height: 600, text: 'Oval Capital Office', bg: '#f5f5f5', textColor: '#333' },
+                { name: 'cta-bg.jpg', width: 1920, height: 600, text: 'Call to Action Background', bg: '#333', textColor: '#fff' }
+            ];
+
+            const container = document.getElementById('imageContainer');
+            container.innerHTML = '';
+
+            imageSpecs.forEach(spec => {
+                const canvasContainer = document.createElement('div');
+                canvasContainer.className = 'canvas-container';
+
+                const canvas = document.createElement('canvas');
+                canvas.width = spec.width;
+                canvas.height = spec.height;
+                const ctx = canvas.getContext('2d');
+
+                // Fill background
+                ctx.fillStyle = spec.bg;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Add gradient overlay
+                const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, 'rgba(212, 175, 55, 0.3)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0.5)');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Add company name
+                ctx.fillStyle = '#d4af37';
+                ctx.font = 'bold 48px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('OVAL CAPITAL', canvas.width / 2, canvas.height / 2 - 40);
+
+                // Add image description
+                ctx.fillStyle = spec.textColor;
+                ctx.font = '24px Arial';
+                ctx.fillText(spec.text, canvas.width / 2, canvas.height / 2 + 20);
+
+                // Add save instructions
+                const instructions = document.createElement('p');
+                instructions.textContent = `Save as: ${spec.name} (${spec.width} × ${spec.height})`;
+
+                // Add download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = '#';
+                downloadLink.className = 'btn';
+                downloadLink.textContent = `Download ${spec.name}`;
+                downloadLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const link = document.createElement('a');
+                    link.download = spec.name;
+                    link.href = canvas.toDataURL('image/jpeg', 0.8);
+                    link.click();
+                });
+
+                canvasContainer.appendChild(canvas);
+                canvasContainer.appendChild(instructions);
+                canvasContainer.appendChild(downloadLink);
+                container.appendChild(canvasContainer);
+            });
+        });
+    </script>
+</body>
+
+</html>

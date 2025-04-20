@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Image Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            max-width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #d4af37;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 15px 0;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Executive Image Generator</h1>
+
+    <p>Click the button below to generate a placeholder image for the executive:</p>
+
+    <button id="generateBtn" class="btn">Generate Image</button>
+
+    <div id="imageContainer"></div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function () {
+            const container = document.getElementById('imageContainer');
+            container.innerHTML = '';
+
+            const canvasContainer = document.createElement('div');
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 800;
+            const ctx = canvas.getContext('2d');
+
+            // Dark blue background
+            ctx.fillStyle = '#0c1f4b';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Head
+            ctx.beginPath();
+            ctx.arc(300, 200, 100, 0, Math.PI * 2);
+            ctx.fillStyle = '#f5d7b5';
+            ctx.fill();
+
+            // Body (suit)
+            ctx.fillStyle = '#1a3365';
+            ctx.fillRect(200, 300, 200, 400);
+
+            // Shoulders
+            ctx.beginPath();
+            ctx.moveTo(200, 300);
+            ctx.lineTo(150, 350);
+            ctx.lineTo(180, 420);
+            ctx.lineTo(200, 400);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(400, 300);
+            ctx.lineTo(450, 350);
+            ctx.lineTo(420, 420);
+            ctx.lineTo(400, 400);
+            ctx.closePath();
+            ctx.fill();
+
+            // Shirt collar
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(250, 320);
+            ctx.lineTo(300, 380);
+            ctx.lineTo(350, 320);
+            ctx.closePath();
+            ctx.fill();
+
+            // Tie
+            ctx.fillStyle = '#d4af37';
+            ctx.beginPath();
+            ctx.moveTo(290, 340);
+            ctx.lineTo(300, 400);
+            ctx.lineTo(310, 340);
+            ctx.closePath();
+            ctx.fill();
+
+            // Add professional look text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Oval Capital Executive', canvas.width / 2, 700);
+
+            // Add download link
+            const downloadLink = document.createElement('a');
+            downloadLink.href = '#';
+            downloadLink.className = 'btn';
+            downloadLink.textContent = 'Download executive.jpg';
+            downloadLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                const link = document.createElement('a');
+                link.download = 'executive.jpg';
+                link.href = canvas.toDataURL('image/jpeg', 0.8);
+                link.click();
+            });
+
+            canvasContainer.appendChild(canvas);
+            canvasContainer.appendChild(downloadLink);
+            container.appendChild(canvasContainer);
+        });
+    </script>
+</body>
+
+</html>
