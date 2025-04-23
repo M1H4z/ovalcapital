@@ -1,110 +1,127 @@
-# Oval Capital Management Services Website
+# Oval Group Website
 
-A bespoke, high-performing corporate website for Oval Capital Management Services SDN BHD, showcasing their diverse business portfolio including Oval Printing, Oval Rice, Oval Construction, and Warung Gita Restaurant.
+A bespoke, high-performing corporate website for the Oval Group of Companies, showcasing their diverse portfolio including Smart Construction (POSB), Advanced Agriculture (ORSB, ONSB), Agricultural Machinery (OMSSB), and other ventures.
 
 ## Features
 
-- **Modern Design**: Clean, professional interface with gold-themed styling to complement the company logo
-- **Responsive Layout**: Fully mobile optimized for all device sizes
-- **Interactive Elements**: Engaging animations and smooth transitions
-- **Business Showcase**: Dedicated sections for each business vertical
-- **Contact Form**: User-friendly contact functionality
-- **Performance Optimized**: Fast loading and smooth scrolling experience
+- **Modern Design**: Clean, professional interface with gold-themed styling.
+- **Image Logo Integration**: Uses the official Oval Group logo throughout the site and as a favicon.
+- **Video Background**: Engaging video background for the hero section on the homepage.
+- **Multi-Page Structure**: Dedicated pages for Home, About Us, Services, and Contact.
+- **Responsive Layout**: Fully mobile optimized for all device sizes.
+- **Interactive Elements**: Engaging animations, hover effects, and smooth scrolling.
+- **Detailed Sections**: Comprehensive pages for About Us and Services.
+- **Homepage Services Summary**: Horizontally scrollable and draggable summary of core services.
+- **Styled Scrollbar**: Custom scrollbar styling for the services summary.
+- **Contact Page**: Includes business hours and an embedded map.
+- **Custom 404 Page**: User-friendly page for broken links.
+- **Preloader**: Loading animation for a smoother initial experience.
+- **Performance Optimized**: Includes image preloading and efficient code.
 
 ## Technologies Used
 
 - HTML5
-- CSS3 (with modern features like Grid, Flexbox, and CSS variables)
-- JavaScript (Vanilla JS, no frameworks)
+- CSS3 (with modern features like Flexbox, CSS variables, custom scrollbars)
+- JavaScript (Vanilla JS for interactivity, animations, draggable scroll)
 - Font Awesome (for icons)
 - Google Fonts (Poppins and Playfair Display)
 
 ## Project Structure
 
 ```
-oval-capital-website/
-├── index.html              # Main HTML file
+oval-group-website/
+├── index.html              # Main homepage
+├── about.html              # About Us page
+├── services.html           # Detailed Services page
+├── contact.html            # Contact Us page
+├── 404.html                # Custom 404 error page
+├── video-resources.html    # Helper page for finding hero video
 ├── assets/
 │   ├── css/
 │   │   └── styles.css      # Main stylesheet
 │   ├── js/
 │   │   └── main.js         # JavaScript functionality
-│   └── images/             # Image assets
-│       ├── hero-bg.jpg     # Hero section background
-│       ├── about-image.jpg # About section image
-│       └── cta-bg.jpg      # Call-to-action background
+│   ├── images/
+│   │   ├── logo.png        # Main company logo & favicon
+│   │   ├── executive.jpg   # Testimonial image (generate via executive.html)
+│   │   ├── about-image.jpg # Placeholder for homepage About section (if re-added)
+│   │   ├── cta-bg.png      # Background for CTA section
+│   │   ├── hero-bg.png     # Fallback/Poster image for hero video
+│   │   ├── placeholder.html # Helper to generate placeholder images
+│   │   └── executive.html  # Helper to generate executive image
+│   └── videos/
+│       └── hero-video.mp4  # Video for hero section background
 └── README.md               # Documentation
 ```
 
 ## Setup Instructions
 
-1. **Clone the repository**
+1. **Clone the repository** (if applicable)
 
+   ```bash
+   git clone <repository-url>
+   cd oval-group-website
    ```
-   git clone https://github.com/your-username/oval-capital-website.git
-   cd oval-capital-website
-   ```
 
-2. **Setup Images**
+2. **Add Required Assets**:
 
-   - Add your images to the `assets/images/` directory
-   - Required images:
-     - `hero-bg.jpg`: A high-quality background image for the hero section
-     - `about-image.jpg`: An image showcasing the company office or team
-     - `cta-bg.jpg`: Background for the call-to-action section
+   - Place the main company logo named `logo.png` (recommended 256x256px) in the `assets/images/` directory.
+   - Place the hero section background video named `hero-video.mp4` in the `assets/videos/` directory. (Use `video-resources.html` for suggestions).
+   - Generate the `executive.jpg` placeholder by opening `assets/images/executive.html` in a browser and saving the generated image to `assets/images/`.
+   - Add suitable background images for the CTA section (`cta-bg.png`) and as a fallback/poster for the hero video (`hero-bg.png`) to `assets/images/`.
 
-3. **Local Development**
-   - Open `index.html` in your browser to view the site
-   - For live reloading during development, you can use tools like Live Server extension in VS Code
+3. **Local Development**:
+   - Open `index.html` in your web browser to view the site.
+   - Use tools like the Live Server extension in VS Code for automatic reloading during development.
 
 ## Customization
 
-### Changing Colors
+### Changing Colors:
 
-- The color scheme can be modified in `assets/css/styles.css` by updating the CSS variables at the top of the file:
+- Modify the CSS variables at the top of `assets/css/styles.css`:
   ```css
   :root {
     --primary-color: #d4af37; /* Gold */
-    --primary-light: #f5e7aa;
-    --secondary-color: #222;
-    /* other variables */
+    /* ... other colors ... */
   }
   ```
 
-### Content Updates
+### Content Updates:
 
-- Company information, contact details, and business descriptions can be updated directly in `index.html`
+- **Homepage (`index.html`)**: Update hero text, business spotlight, services summary, testimonial, CTA.
+- **About Page (`about.html`)**: Update company overview, subsidiary details, philosophy.
+- **Services Page (`services.html`)**: Update detailed descriptions of each service.
+- **Contact Page (`contact.html`)**: Update address, phone, email, map embed, business hours.
 
-### Adding New Sections
+### Logo & Video:
 
-1. Create a new section in `index.html`
-2. Add corresponding styles in `styles.css`
-3. If needed, add JavaScript functionality in `main.js`
+- Replace `assets/images/logo.png` with your final logo.
+- Replace `assets/videos/hero-video.mp4` with your chosen video.
 
 ## Deployment
 
-The website can be deployed to any standard web hosting service:
+The website consists of static files and can be deployed to any standard web hosting service (e.g., Netlify, Vercel, GitHub Pages, traditional hosting):
 
-1. Upload all files maintaining the directory structure
-2. Ensure the server is configured to serve `index.html` as the default page
+1. Upload all files and folders (`index.html`, `about.html`, `services.html`, `contact.html`, `404.html`, `assets/`, etc.) maintaining the directory structure.
+2. Ensure the server is configured correctly (usually handles `index.html` automatically).
 
 ## Browser Compatibility
 
-The website is optimized for:
+Optimized for the latest versions of modern browsers:
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+- Chrome
+- Firefox
+- Safari
+- Edge
 - Mobile browsers (iOS Safari, Android Chrome)
 
 ## License
 
-This project is proprietary and belongs to Oval Capital Management Services SDN BHD.
+This project is proprietary and belongs to the Oval Group of Companies.
 
 ## Contact
 
-For any queries or support:
+For any queries regarding the website or company:
 
-- Email: info@ovalcapital.com.my
-- Phone: +60 3 1234 5678
+- Email: info@ovalcapital.com.my (Update if different for Oval Group)
+- Phone: +60 3 1234 5678 (Update with correct phone number)

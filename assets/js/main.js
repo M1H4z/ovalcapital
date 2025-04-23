@@ -82,15 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
   navLinks.forEach((link) => {
     link.addEventListener("click", function () {
       navMenu.classList.remove("active");
-
       // Reset icon
       const icon = menuToggle.querySelector("i");
       icon.classList.remove("fa-times");
       icon.classList.add("fa-bars");
-
-      // Update active link
-      navLinks.forEach((l) => l.classList.remove("active"));
-      this.classList.add("active");
     });
   });
 
@@ -159,10 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Execute counter animation when in view
   initializeCounters();
 
-  // Highlight active nav link based on scroll position
-  updateActiveNavLink();
-  window.addEventListener("scroll", updateActiveNavLink);
-
   // Preload images for smooth transitions
   preloadImages();
 
@@ -173,6 +164,70 @@ document.addEventListener("DOMContentLoaded", function () {
       easing: "ease-in-out",
       once: true,
     });
+  }
+
+  // Draggable Scrolling for Services Section
+  const servicesSlider = document.querySelector(
+    ".services-section .services-content"
+  );
+  if (servicesSlider) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Mouse Events
+    servicesSlider.addEventListener("mousedown", (e) => {
+      isDown = true;
+      servicesSlider.classList.add("active-drag");
+      startX = e.pageX - servicesSlider.offsetLeft;
+      scrollLeft = servicesSlider.scrollLeft;
+    });
+
+    servicesSlider.addEventListener("mouseleave", () => {
+      isDown = false;
+      servicesSlider.classList.remove("active-drag");
+    });
+
+    servicesSlider.addEventListener("mouseup", () => {
+      isDown = false;
+      servicesSlider.classList.remove("active-drag");
+    });
+
+    servicesSlider.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault(); // Prevent text selection, etc.
+      const x = e.pageX - servicesSlider.offsetLeft;
+      const walk = (x - startX) * 2; // The '2' makes scrolling faster
+      servicesSlider.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch Events
+    servicesSlider.addEventListener(
+      "touchstart",
+      (e) => {
+        isDown = true;
+        // No class change needed for touch usually
+        startX = e.touches[0].pageX - servicesSlider.offsetLeft;
+        scrollLeft = servicesSlider.scrollLeft;
+      },
+      { passive: true }
+    ); // Use passive for better scroll performance on touch
+
+    servicesSlider.addEventListener("touchend", () => {
+      isDown = false;
+    });
+
+    servicesSlider.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!isDown) return;
+        // No preventDefault if passive: true
+        const x = e.touches[0].pageX - servicesSlider.offsetLeft;
+        const walk = (x - startX) * 2;
+        servicesSlider.scrollLeft = scrollLeft - walk;
+      },
+      { passive: true }
+    );
   }
 });
 
@@ -277,36 +332,12 @@ function initializeCounters() {
   startCounting();
 }
 
-// Update active navigation link based on scroll position
-function updateActiveNavLink() {
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".nav-menu li a");
-
-  let currentSection = "";
-
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-
-    if (window.scrollY >= sectionTop - 200) {
-      currentSection = section.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${currentSection}`) {
-      link.classList.add("active");
-    }
-  });
-}
-
 // Preload images for smooth transitions
 function preloadImages() {
   const images = [
-    "assets/images/hero-bg.jpg",
+    "assets/images/hero-bg.png",
     "assets/images/about-image.jpg",
-    "assets/images/cta-bg.jpg",
+    "assets/images/cta-bg.png",
   ];
 
   images.forEach((src) => {
